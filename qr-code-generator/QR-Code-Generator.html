@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TK's QR Code Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- QRCode JS -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+  <div class="hero">
+    <h1><i class="fas fa-qrcode me-2"></i>TK's QR Code Generator</h1>
+
+    <div class="input-container">
+      <input type="text" id="linkInput" placeholder="Enter a URL">
+      <br>
+      <button onclick="generateQRCode()">Generate</button>
+      <button onclick="downloadQRCode()">Download</button>
+    </div>
+
+    <div id="qrcode"></div>
+  </div>
+
+<footer class="footer mt-5">
+  <div class="container text-center py-4">
+    <h5 class="mb-3">Let's Connect</h5>
+    <p class="fs-5">
+      <i class="fas fa-envelope me-2"></i>
+      <a href="mailto:mthokozisimyende.work@gmail.com">mthokozisimyende.work@gmail.com</a><br>
+
+      <i class="fas fa-phone-alt me-2 mt-2"></i>
+      066 227 7106<br>
+
+      <i class="fas fa-map-marker-alt me-2 mt-2"></i>
+      Durban, KZN
+    </p>
+
+    <div class="mt-3">
+      <a href="https://github.com/tkDev0101" target="_blank" class="btn btn-outline-light btn-sm me-2">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/mthokozisi-myende-14215720b/" target="_blank" class="btn btn-outline-light btn-sm">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </div>
+
+    <p class="mt-4 text-muted small">&copy; 2025 Mthokozisi Myende. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  <script>
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+      width: 200,
+      height: 200,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+
+    function generateQRCode() {
+      const link = document.getElementById("linkInput").value;
+      if (!link.trim()) {
+        alert("Please enter a URL.");
+        return;
+      }
+      qrcode.clear();
+      qrcode.makeCode(link);
+    }
+
+    function downloadQRCode() {
+      const qrContainer = document.getElementById("qrcode");
+      const img = qrContainer.querySelector("img") || qrContainer.querySelector("canvas");
+
+      if (!img) {
+        alert("Please generate a QR code first.");
+        return;
+      }
+
+      let dataUrl = img.tagName.toLowerCase() === 'img' ? img.src : img.toDataURL("image/png");
+
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = "tk-qrcode.png";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  </script>
+
+</body>
+</html>

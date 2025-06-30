@@ -14,13 +14,18 @@
 </head>
 
 
-
 <body class="site-body">
+  <div class="container">
+
 
   <!-- HERO SECTION -->
   <section class="px-3 px-md-5">
     <div class="card text-center hero-card-wide p-4 mx-auto">
-      <img src="assets/img/profile.jpg" class="rounded-circle mb-3 shadow mx-auto" alt="Profile" width="150" height="150" />
+
+      <img src="assets/img/profile.jpg" class="rounded-circle mb-3 shadow mx-auto img-fluid" style="max-width: 150px;" alt="Profile">
+
+
+
       <h1 class="fw-bold text-light">Mthokozisi tk Myende</h1>
       <p class="lead text-white-50">Aspiring Software Developer passionate about Cloud, Code & Creativity.</p>
       <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
@@ -321,6 +326,108 @@
   <hr />
 
 
+  <!-- QR FUN SECTION -->
+<!-- QR Section -->
+<section class="qr-section text-center">
+  <h2>QR Code Fun Zone</h2>
+  <p class="text-muted mb-4">Scan or generate your own QR code below 🔍</p>
+
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-3 qr-image-card">
+      <img src="assets/img/github-qr.png" alt="GitHub QR" class="img-fluid">
+
+      <p>My GitHub</p>
+    </div>
+    <div class="col-md-3 qr-image-card">
+      <img src="assets/img/linkedin-qr.png" alt="LinkedIn QR" class="img-fluid">
+      <p>My LinkedIn</p>
+    </div>
+    <div class="col-md-3 qr-image-card">
+      <img src="assets/img/dev-library-qr.png" alt="Dev-Library QR" class="img-fluid">
+      <p>Developer Notes Library</p>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <a href="#qr-generator" class="btn btn-outline-primary">
+      <i class="fas fa-plus"></i> Generate Your Own QR Code
+    </a>
+  </div>
+</section>
+
+
+
+<!-- QR GENERATOR SECTION -->
+<section id="qr-generator" class="qr-generator text-center">
+  <h2>Make Your Own QR Code</h2>
+
+<div class="row justify-content-center">
+  <div class="col-10 col-sm-8 col-md-6">
+    <input type="text" id="linkInput" placeholder="Enter a URL" class="form-control my-3">
+  </div>
+</div>
+
+
+
+  <div class="d-flex justify-content-center gap-2">
+    <button onclick="generateQRCode()" class="btn btn-primary">Generate</button>
+    <button onclick="downloadQRCode()" class="btn btn-outline-light">Download</button>
+  </div>
+  <div id="qrcode" class="mt-4"></div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<!-- QRCode.js (add before </body>) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script>
+  var qrcode = new QRCode(document.getElementById("qrcode"), {
+    width: 200,
+    height: 200,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+  });
+
+  function generateQRCode() {
+    const link = document.getElementById("linkInput").value;
+    if (!link.trim()) {
+      alert("Please enter a URL.");
+      return;
+    }
+    qrcode.clear();
+    qrcode.makeCode(link);
+  }
+
+  function downloadQRCode() {
+    const qrContainer = document.getElementById("qrcode");
+    const img = qrContainer.querySelector("img") || qrContainer.querySelector("canvas");
+    if (!img) {
+      alert("Please generate a QR code first.");
+      return;
+    }
+
+    let dataUrl = img.tagName.toLowerCase() === 'img' ? img.src : img.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = "tk-qrcode.png";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+</script>
+
+
+
+
   <!-- FOOTER -->
   <footer class="footer mt-5">
     <div class="container text-center py-4">
@@ -337,16 +444,11 @@
       </div>
       <p class="mt-4 text-muted small">&copy; 2025 Mthokozisi Myende. All rights reserved.</p>
     </div>
-  </footer>
+  </footer> 
 
 
-  <!-- JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-    tooltips.forEach(el => new bootstrap.Tooltip(el));
-  </script>
 
+  </div>
 </body>
 
 

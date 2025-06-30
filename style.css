@@ -75,6 +75,25 @@ h2 {
 }
 
 
+section {
+  padding: 20px 15px;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: 15px 10px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .hero-card-wide {
+    padding: 20px 15px;
+  }
+}
+
+
 
 
 /* Cards */
@@ -128,6 +147,53 @@ footer a:hover {
     text-decoration: underline;
 }
 
+
+/* QR Fun Section */
+.qr-section {
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    color: #f8fafc;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    margin-top: 40px;
+}
+
+/* QR Generator */
+.qr-generator {
+    padding: 30px;
+    background-color: #1e293b;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 40px auto;
+    color: #f8fafc;
+}
+.qr-generator input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.qr-generator button {
+    border-radius: 50px;
+    padding: 8px 20px;
+}
+
+
+.qr-image-card img {
+    max-width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+.qr-image-card img:hover {
+    transform: scale(1.05);
+}
+.qr-image-card p {
+    margin-top: 10px;
+    font-weight: 500;
+}
 
 
 
